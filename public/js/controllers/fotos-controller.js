@@ -1,16 +1,11 @@
 angular.module('alurapic').controller('FotosController', function($scope, $http){
-    $scope.fotos = [
-      {
-        titulo: 'Leão 1',
-        url: 'https://brunoricci.com.br/images/casa_lannister.jpg'
-      },
-      {
-        titulo: 'Leão 2',
-        url: 'https://brunoricci.com.br/images/casa_lannister.jpg'
-      },
-      {
-        titulo: 'Leão 3',
-        url: 'https://brunoricci.com.br/images/casa_lannister.jpg'
-      }
-    ];
+    $scope.fotos = [];
+
+    $http.get('v1/fotos')
+    .then(function(fotos) {
+      $scope.fotos = fotos.data;
+    })
+    .catch(function(erro) {
+      console.log(erro);
+    });
 });
